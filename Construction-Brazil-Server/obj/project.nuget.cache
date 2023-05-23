@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "z5fu7+xjZ5kYHDx7JBlD0HNCgP4bTSR55+HG8OhzJATAwSBDvX3H9VBx6QyZu3VL7EvHt9iSqtAXcxtrUpfmOA==",
+  "success": true,
+  "projectFilePath": "C:\\Code\\rma25\\construction-brazil-server\\Construction-Brazil-Server\\Construction-Brazil-Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rodo\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Rodo\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Rodo\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Rodo\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Rodo\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Rodo\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
