@@ -7,6 +7,10 @@ using construction_brazil_server.DataStores;
 using Serilog.Events;
 using construction_brazil_server.Extensions.DataStores;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using construction_brazil_server.Extensions.DepedencyInjection;
+using System.Reflection;
+using construction_brazil_server.Interfaces.Shared;
 
 namespace construction_brazil_server
 {
@@ -19,7 +23,7 @@ namespace construction_brazil_server
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             _appConfig = configuration.Get<AppConfig>();
-            
+
             Log.Logger = new LoggerConfiguration()
                         .MinimumLevel.Verbose()
                         .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
@@ -45,14 +49,25 @@ namespace construction_brazil_server
 
             services.AddSingleton(Log.Logger);
             services.AddSingleton(_appConfig);
-            services.AddSingleton(_appConfig.ConnectionStrings);   
-            services.AddSingleton(_appConfig.Elasticsearch);                                 
+            services.AddSingleton(_appConfig.ConnectionStrings);
+            services.AddSingleton(_appConfig.Elasticsearch);
+
+            // Shared IRepository
+            var assembly = Assembly.GetEntryAssembly();
+
+            if (assembly != null)
+            {
+                assembly.GetTypesAssignableFrom<IRepository>().ForEach((type) =>
+                {
+                    services.AddScoped(typeof(IRepository), type);
+                });
+            }
 
             // Injecting Contexts
             services.AddDbContext<ConstructionBrazil_Context>(options =>
             {
                 // Setting a Connection Timeout because some files are too big and need a longer connection timeout (180 seconds)
-                options.UseSqlServer(_appConfig.ConnectionStrings.DefaultConnection,                   
+                options.UseSqlServer(_appConfig.ConnectionStrings.DefaultConnection,
                     sqlServerOptions => sqlServerOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)
                                                         .CommandTimeout(_appConfig.ConnectionStrings.ConnectionTimeout)
                                                         .UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
@@ -106,10 +121,12 @@ namespace construction_brazil_server
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "SINPROEGO");
             });
 
-            Log.Logger.Information("Ensuring Seed Data for Context.");
+            Log.Logger.Information("Begining data seeding...");
 
             // If there is no data in certain tables, populate it with initial data
             dataContext.EnsureSeedDataForContext();
+
+            Log.Logger.Information("Completed data seeding...");
 
             // Displaying the status code in the browser instead of a blank page;
             app.UseStatusCodePages();
@@ -120,7 +137,7 @@ namespace construction_brazil_server
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();                
+                endpoints.MapControllers();
             });
 
             Log.Logger.Information("Start up completed.");
