@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace construction_brazil_server.Entities.Logs
+namespace construction_brazil_server.Entities.Static
 {
-    [Index(nameof(CreatedOn), IsUnique = false)]
+    [Index(nameof(Criado), IsUnique = false)]
     [Table("LoggingTypes", Schema = "dbo")]
     public class LoggingType
     {
@@ -16,16 +16,16 @@ namespace construction_brazil_server.Entities.Logs
 
         [Required]
         [Column(TypeName = "varchar(max)")]
-        public string Name { get; set; }
+        public string Nome { get; set; }
 
         [Column(TypeName = "varchar(256)")]
         [MaxLength(256)]
-        public string Description { get; set; }
+        public string Descricao { get; set; }
 
         [Required]
         [Column(TypeName = "datetimeoffset(7)")]
         [DefaultValue("getutcdate()")]
-        public DateTimeOffset CreatedOn { get; set; }
+        public DateTimeOffset Criado { get; set; }
 
     }
 }

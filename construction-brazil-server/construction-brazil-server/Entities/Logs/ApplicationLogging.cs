@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using construction_brazil_server.Entities.Static;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace construction_brazil_server.Entities.Logs
-{
-    [Index(nameof(CreatedOn), IsUnique = false)]
+{    
+    [Index(nameof(LoggingTypeId), nameof(Criado), IsUnique = false)]
     [Table("ApplicationLoggings", Schema = "dbo")]
     public class ApplicationLogging
     {
@@ -16,9 +16,10 @@ namespace construction_brazil_server.Entities.Logs
         public long ApplicationLoggingId { get; set; }
 
         //Many-To-One
+        [Required]
         [ForeignKey("LoggingTypeId")]
         [Column(TypeName = "bigint")]
-        public long? LoggingTypeId { get; set; }
+        public long LoggingTypeId { get; set; }
         public virtual LoggingType LoggingType { get; set; }
 
         //Many-To-One
@@ -29,7 +30,7 @@ namespace construction_brazil_server.Entities.Logs
 
         [Required]
         [Column(TypeName = "varchar(max)")]
-        public string Message { get; set; }
+        public string Mensagem { get; set; }
 
         [Column(TypeName = "varchar(128)")]
         [MaxLength(128)]
@@ -42,7 +43,7 @@ namespace construction_brazil_server.Entities.Logs
         [Required]
         [Column(TypeName = "datetimeoffset(7)")]
         [DefaultValue("getutcdate()")]
-        public DateTimeOffset CreatedOn { get; set; }
+        public DateTimeOffset Criado { get; set; }
 
     }
 }

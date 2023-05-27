@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace construction_brazil_server.Entities.Logs
 {
-    [Index(nameof(Type), nameof(CreatedOn), IsUnique = false)]
+    [Index(nameof(Type), nameof(Criado), IsUnique = false)]
     [Table("ExceptionLoggings", Schema = "dbo")]
     public class ExceptionLogging
     {
@@ -37,6 +37,6 @@ namespace construction_brazil_server.Entities.Logs
         [Required]
         [Column(TypeName = "datetimeoffset(7)")]
         [DefaultValue("getutcdate()")]
-        public DateTimeOffset CreatedOn { get; set; }
+        public DateTimeOffset Criado { get; set; }
     }
 }
