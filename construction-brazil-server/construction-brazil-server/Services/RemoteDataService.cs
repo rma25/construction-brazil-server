@@ -1,4 +1,5 @@
-﻿using EEPServer.Interfaces;
+﻿using construction_brazil_server.Interfaces.Shared;
+using EEPServer.Interfaces;
 using LazyCache;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace EEPServer.Services
 {
-    public class RemoteDataService : IRemoteDataService
+    public class RemoteDataService : IRemoteDataService, IRepository
     {
         private readonly IAppCache _cache;
 

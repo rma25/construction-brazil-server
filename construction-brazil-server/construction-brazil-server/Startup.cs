@@ -7,7 +7,6 @@ using construction_brazil_server.DataStores;
 using Serilog.Events;
 using construction_brazil_server.Extensions.DataStores;
 using Newtonsoft.Json;
-using System.Text.RegularExpressions;
 using construction_brazil_server.Extensions.DepedencyInjection;
 using System.Reflection;
 using construction_brazil_server.Interfaces.Shared;
@@ -60,7 +59,7 @@ namespace construction_brazil_server
                 assembly.GetTypesAssignableFrom<IRepository>().ForEach((type) =>
                 {
                     services.AddScoped(typeof(IRepository), type);
-                });
+                }); 
             }
 
             // Injecting Contexts
