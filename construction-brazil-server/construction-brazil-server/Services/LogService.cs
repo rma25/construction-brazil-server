@@ -69,7 +69,7 @@ namespace construction_brazil_server.Services
 
             using var context = new ConstructionBrazil_Context(_appConfig.ConnectionStrings.DefaultConnection);
 
-            var logTypeId = context.LoggingTypes.FirstOrDefault(x => x.Nome.ToLower() == EntityConstants.ApplicationLoggingTypes.Critical.ToLower())?.LoggingTypeId ?? 0;
+            var logTypeId = context.LoggingTypes.FirstOrDefault(x => x.Nome.ToLower() == EntityConstants.ApplicationLoggingTypeConstants.Critical.ToLower())?.LoggingTypeId ?? 0;
 
             if (!DoesLogTypeExists(logTypeId))
                 throw new ArgumentException($"{nameof(logTypeId)} = {logTypeId} can't be found.");
@@ -105,7 +105,7 @@ namespace construction_brazil_server.Services
 
             using var context = new ConstructionBrazil_Context(_appConfig.ConnectionStrings.DefaultConnection);
 
-            var logTypeId = context.LoggingTypes.FirstOrDefault(x => x.Nome.ToLower() == EntityConstants.ApplicationLoggingTypes.Information.ToLower())?.LoggingTypeId ?? 0;
+            var logTypeId = context.LoggingTypes.FirstOrDefault(x => x.Nome.ToLower() == EntityConstants.ApplicationLoggingTypeConstants.Information.ToLower())?.LoggingTypeId ?? 0;
 
             if (!DoesLogTypeExists(logTypeId))
                 throw new ArgumentException($"{nameof(logTypeId)} = {logTypeId} can't be found.");
