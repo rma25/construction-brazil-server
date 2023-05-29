@@ -18,7 +18,7 @@ namespace construction_brazil_server.Controllers
             _contatoRepo = contatoRepo;
         }
 
-        [HttpPost("cpf/{cpf}/IsCpfUnique")]
+        [HttpGet("cpf/{cpf}/IsCpfUnique")]
         public async Task<ActionResult> IsCpfUnique([FromRoute] string cpf)
         {
             if (string.IsNullOrEmpty(cpf))

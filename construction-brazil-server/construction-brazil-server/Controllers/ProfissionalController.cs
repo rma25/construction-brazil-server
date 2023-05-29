@@ -18,13 +18,22 @@ namespace construction_brazil_server.Controllers
             _profissionalRepo = profissionalRepo;
         }
 
-        [HttpPost("GetAdmins")]
-        public async Task<ActionResult> GetAdmins([FromBody] ProfissionalAdminFilterDto filter)
+        [HttpPost("GetAdminTotal")]
+        public async Task<ActionResult> GetAdminTotal([FromBody] ProfissionalAdminFilterDto filter)
         {
             if (filter == null)
                 return HandleBadRequest(nameof(filter));
 
-            return Ok(await _profissionalRepo.GetAsync(filter));
+            return Ok(await _profissionalRepo.GetAdminTotalAsync(filter));
+        }
+
+        [HttpPost("GetAdminPage")]
+        public async Task<ActionResult> GetAdminPage([FromBody] ProfissionalAdminFilterDto filter)
+        {
+            if (filter == null)
+                return HandleBadRequest(nameof(filter));
+
+            return Ok(await _profissionalRepo.GetAdminPageAsync(filter));
         }
 
         [HttpPost("Insert")]

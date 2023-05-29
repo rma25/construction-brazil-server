@@ -20,6 +20,36 @@ namespace construction_brazil_server.Interfaces
             _contatoRepo = contatoRepo;
         }
 
+        protected IQueryable<Profissional> GetAdminProfissionals(ProfissionalAdminFilterDto filter)
+        {
+            var startedOn = filter.StartedOn.StripDateAndTime(DateTimeOffset.MinValue);
+            var endedOn = filter.StartedOn.StripDateAndTime(DateTimeOffset.MaxValue);
+
+            var profissionals = _context.Profissionals
+                                        .Include(x => x.Contato)
+                                        .Include(x => x.Endereco)
+                                        .ThenInclude(x => x.Estado)
+                                        .Where(x => (startedOn <= x.Criado.Date && x.Criado.Date <= endedOn)
+                                                    || (startedOn <= x.Contato.DataDeNascimento.Date && x.Contato.DataDeNascimento.Date <= endedOn));
+
+            if (!string.IsNullOrEmpty(filter.SearchText))
+            {
+                var loweredText = filter.SearchText.ToLower();
+
+                profissionals = profissionals.Where(x => x.Contato.Cpf.ToLower().Contains(loweredText)
+                                                        || x.Contato.Nome.ToLower().Contains(loweredText)
+                                                        || x.Contato.Sobrenome.ToLower().Contains(loweredText)
+                                                        || (x.Contato.Telefone != null && x.Contato.Telefone.ToLower().Contains(loweredText))
+                                                        || x.Endereco.Cep.ToLower().Contains(loweredText)
+                                                        || (x.Endereco.Cidade != null && x.Endereco.Cidade.ToLower().Contains(loweredText))
+                                                        || (x.Endereco.Estado != null && x.Endereco.Estado.Nome.ToLower().Contains(loweredText))
+                                                        || (x.Pis != null && x.Pis.ToLower().Contains(loweredText))
+                                                        || (x.Pix != null && x.Pix.ToLower().Contains(loweredText)));
+            }
+
+            return profissionals;
+        }
+
         public async Task<bool> Exists(long id)
         {
             if (id == 0)
@@ -47,37 +77,12 @@ namespace construction_brazil_server.Interfaces
             _context.ChangeTracker.Clear();
         }
 
-        public async Task<IEnumerable<AdminProfissionalDto>> GetAsync(ProfissionalAdminFilterDto filter)
+        public async Task<IEnumerable<AdminProfissionalDto>> GetAdminPageAsync(ProfissionalAdminFilterDto filter)
         {
             if (filter == null)
                 throw new ArgumentNullException(nameof(filter));
 
-            var startedOn = filter.StartedOn.StripDateAndTime(DateTimeOffset.MinValue);
-            var endedOn = filter.StartedOn.StripDateAndTime(DateTimeOffset.MaxValue);
-
-            var profissionals = _context.Profissionals
-                                        .Include(x => x.Contato)
-                                        .Include(x => x.Endereco)
-                                        .ThenInclude(x => x.Estado)
-                                        .Where(x => (startedOn <= x.Criado.Date && x.Criado.Date <= endedOn)
-                                                    || (startedOn <= x.Contato.DataDeNascimento.Date && x.Contato.DataDeNascimento.Date <= endedOn));
-
-            if (!string.IsNullOrEmpty(filter.SearchText))
-            {
-                var loweredText = filter.SearchText.ToLower();
-
-                profissionals = profissionals.Where(x => x.Contato.Cpf.ToLower().Contains(loweredText)
-                                                        || x.Contato.Nome.ToLower().Contains(loweredText)
-                                                        || x.Contato.Sobrenome.ToLower().Contains(loweredText)
-                                                        || (x.Contato.Telefone != null && x.Contato.Telefone.ToLower().Contains(loweredText))
-                                                        || x.Endereco.Cep.ToLower().Contains(loweredText)
-                                                        || (x.Endereco.Cidade != null && x.Endereco.Cidade.ToLower().Contains(loweredText))
-                                                        || (x.Endereco.Estado != null && x.Endereco.Estado.Nome.ToLower().Contains(loweredText))
-                                                        || (x.Pis != null && x.Pis.ToLower().Contains(loweredText))
-                                                        || (x.Pix != null && x.Pix.ToLower().Contains(loweredText)));
-            }
-
-            var dtos = await profissionals
+            var dtos = await GetAdminProfissionals(filter)
                             .Skip(filter.CurrentPage.SkipOver(filter.TotalPerPage))
                             .Take(filter.TotalPerPage)
                             .Select(x => new AdminProfissionalDto
@@ -117,6 +122,16 @@ namespace construction_brazil_server.Interfaces
                             .ToListAsync();
 
             return dtos;
+        }
+
+        public async Task<long> GetAdminTotalAsync(ProfissionalAdminFilterDto filter)
+        {
+            if (filter == null)
+                throw new ArgumentNullException(nameof(filter));
+
+            var total = await GetAdminProfissionals(filter).CountAsync();
+
+            return total;
         }
 
         public async Task<long> InsertAsync(AdminProfissionalDto profissional)
