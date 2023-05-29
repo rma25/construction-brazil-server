@@ -7,6 +7,13 @@ namespace construction_brazil_server.Interfaces
     public interface IProfissionalRepository : IRepository
     {
         /// <summary>
+        /// Checks to see if Profissional exists
+        /// </summary>
+        /// <param name="id">Profissional Id</param>
+        /// <returns>Message if it can't be deleted</returns>
+        public Task<bool> Exists(long id);
+
+        /// <summary>
         /// Gets all the profissionals based on the filter
         /// </summary>
         /// <param name="filter">Filters the collections</param>

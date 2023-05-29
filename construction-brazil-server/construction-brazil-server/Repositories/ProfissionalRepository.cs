@@ -20,6 +20,14 @@ namespace construction_brazil_server.Interfaces
             _contatoRepo = contatoRepo;
         }
 
+        public async Task<bool> Exists(long id)
+        {
+            if (id == 0)
+                throw new ArgumentException($"{nameof(id)} is not valid.");
+
+            return await _context.Profissionals.AnyAsync(x => x.ProfissionalId == id);
+        }
+
         public async Task DeleteAsync(long id)
         {
             if (id == 0)
