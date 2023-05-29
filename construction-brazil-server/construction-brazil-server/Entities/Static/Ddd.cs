@@ -15,7 +15,7 @@ namespace construction_brazil_server.Entities.Static
         public long DddId { get; set; }
 
         /// <summary>
-        /// Masculino, Feminino, Outro
+        /// 11,12,13
         /// </summary>
         [Required]
         [Column(TypeName = "int")]

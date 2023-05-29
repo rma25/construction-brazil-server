@@ -25,8 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Static\" />
-    <Folder Include="Repositories\" />
+    <Folder Include="Dtos\Admin\" />
+    <Folder Include="Dtos\View\" />
   </ItemGroup>
 
 </Project>
