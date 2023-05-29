@@ -8,7 +8,7 @@ namespace construction_brazil_server.Controllers.Base
     {        
         protected ILogService LogService;        
        
-        protected MyControllerBase(ILogService logService) => LogService = logService;        
+        protected BaseController(ILogService logService) => LogService = logService;        
         
         protected ActionResult HandleBadRequest(string badParameterName, object value, [CallerMemberName] string caller = "")
             => HandleError(BadRequest, $"{badParameterName} can't be {value ?? "Not Found"}", caller);

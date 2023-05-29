@@ -4,22 +4,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace construction_brazil_server.Interfaces.Static
 {
-    public class DddRepository : IDddRepository
+    public class SexoRepository : ISexoRepository
     {
         private readonly ConstructionBrazil_Context _context;
 
-        public DddRepository(ConstructionBrazil_Context context)
+        public SexoRepository(ConstructionBrazil_Context context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<DddDto>> GetAsync()
+        public async Task<IEnumerable<SexoDto>> GetAsync()
         {
-            var dtos = await _context.Ddds
-                                     .Select(x => new DddDto
+            var dtos = await _context.Sexos
+                                     .Select(x => new SexoDto
                                      {
-                                         Id = x.DddId,
-                                         NumeroDeDdd = x.NumeroDeDdd
+                                         Id = x.SexoId,
+                                         Tipo = x.Tipo
                                      })
                                      .ToListAsync();
 

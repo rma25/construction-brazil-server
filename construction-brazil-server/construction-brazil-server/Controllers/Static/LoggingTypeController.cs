@@ -6,21 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 namespace construction_brazil_server.Controllers.Static
 {
     [ApiController]
-    [Route("/Ddd")]
-    public class DddController : BaseController
+    [Route("/LoggingType")]
+    public class LoggingTypeController : BaseController
     {
-        private readonly IDddRepository _dddRepo;
+        private readonly ILoggingTypeRepository _loggingTypeRepo;
 
-        public DddController(ILogService logService, IDddRepository dddRepo) : base(logService)
+        public LoggingTypeController(ILogService logService, ILoggingTypeRepository loggingTypeRepo) : base(logService)
         {
-            _dddRepo = dddRepo;
+            _loggingTypeRepo = loggingTypeRepo;
         }
 
 
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _dddRepo.GetAsync());
+            return Ok(await _loggingTypeRepo.GetAsync());
         }
     }
 }

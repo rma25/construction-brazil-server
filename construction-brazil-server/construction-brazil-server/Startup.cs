@@ -86,15 +86,15 @@ namespace construction_brazil_server
             });
 
             // Swagger
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "SINPROEGO",
-                    Description = "Demonstrating Restful Web Api Skills through a CRUD application"
-                });
-            });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo
+            //    {
+            //        Version = "v1",
+            //        Title = "SINPROEGO",
+            //        Description = "Demonstrating Restful Web Api Skills through a CRUD application"
+            //    });
+            //});
 
             services.AddLazyCache();
             services.AddControllers() // Make TimeSpan serialize correctly I.E. as a string

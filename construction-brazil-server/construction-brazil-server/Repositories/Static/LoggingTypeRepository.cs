@@ -4,22 +4,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace construction_brazil_server.Interfaces.Static
 {
-    public class DddRepository : IDddRepository
+    public class LoggingTypeRepository : ILoggingTypeRepository
     {
         private readonly ConstructionBrazil_Context _context;
 
-        public DddRepository(ConstructionBrazil_Context context)
+        public LoggingTypeRepository(ConstructionBrazil_Context context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<DddDto>> GetAsync()
+        public async Task<IEnumerable<LoggingTypeDto>> GetAsync()
         {
-            var dtos = await _context.Ddds
-                                     .Select(x => new DddDto
+            var dtos = await _context.LoggingTypes
+                                     .Select(x => new LoggingTypeDto
                                      {
-                                         Id = x.DddId,
-                                         NumeroDeDdd = x.NumeroDeDdd
+                                         Id = x.LoggingTypeId,
+                                         Nome = x.Nome                                         
                                      })
                                      .ToListAsync();
 

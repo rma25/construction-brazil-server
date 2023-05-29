@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>construction_brazil_server</RootNamespace>
+    <StartupObject>Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

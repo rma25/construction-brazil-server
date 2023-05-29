@@ -6,21 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 namespace construction_brazil_server.Controllers.Static
 {
     [ApiController]
-    [Route("/Ddd")]
-    public class DddController : BaseController
+    [Route("/Sexo")]
+    public class SexoController : BaseController
     {
-        private readonly IDddRepository _dddRepo;
+        private readonly ISexoRepository _sexoRepo;
 
-        public DddController(ILogService logService, IDddRepository dddRepo) : base(logService)
+        public SexoController(ILogService logService, ISexoRepository sexoRepo) : base(logService)
         {
-            _dddRepo = dddRepo;
+            _sexoRepo = sexoRepo;
         }
 
 
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _dddRepo.GetAsync());
+            return Ok(await _sexoRepo.GetAsync());
         }
     }
 }
