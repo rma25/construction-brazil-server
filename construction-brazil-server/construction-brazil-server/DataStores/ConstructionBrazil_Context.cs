@@ -140,6 +140,10 @@ namespace construction_brazil_server.DataStores
                 entity.Property(e => e.Criado)
                       .IsRequired()
                       .HasDefaultValueSql("(getutcdate())");
+
+                entity.Property(e => e.ProfissionalKey)
+                      .IsRequired()
+                      .HasDefaultValueSql("(NEWID())");
             });
 
             OnModelCreatingPartial(modelBuilder);

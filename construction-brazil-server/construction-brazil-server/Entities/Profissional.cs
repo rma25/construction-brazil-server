@@ -64,5 +64,10 @@ namespace construction_brazil_server.Entities.Logs
 
         [Column(TypeName = "datetimeoffset(7)")]
         public DateTimeOffset? Modificado { get; set; }
+
+        [Required]
+        [Column(TypeName = "uniqueidentifier")]
+        [DefaultValue("NEWID()")]
+        public Guid ProfissionalKey { get; set; }
     }
 }

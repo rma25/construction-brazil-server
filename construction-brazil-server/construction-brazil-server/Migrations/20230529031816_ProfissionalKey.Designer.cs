@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using construction_brazil_server.DataStores;
 
@@ -11,9 +12,11 @@ using construction_brazil_server.DataStores;
 namespace construction_brazil_server.Migrations
 {
     [DbContext(typeof(ConstructionBrazil_Context))]
-    partial class ConstructionBrazil_ContextModelSnapshot : ModelSnapshot
+    [Migration("20230529031816_ProfissionalKey")]
+    partial class ProfissionalKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

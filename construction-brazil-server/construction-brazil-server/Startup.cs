@@ -51,6 +51,8 @@ namespace construction_brazil_server
             services.AddSingleton(_appConfig);
             services.AddSingleton(_appConfig.ConnectionStrings);
             services.AddSingleton(_appConfig.Elasticsearch);
+            services.AddSingleton(_appConfig.CorsPolicy);
+            services.AddSingleton(_appConfig.StorageAccount);
 
             services.AddScoped<IDddRepository, DddRepository>();
             services.AddScoped<IEstadoRepository, EstadoRepository>();
