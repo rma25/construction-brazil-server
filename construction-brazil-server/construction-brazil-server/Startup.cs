@@ -15,6 +15,7 @@ using construction_brazil_server.Interfaces.Services;
 using construction_brazil_server.Services;
 using EEPServer.Interfaces;
 using EEPServer.Services;
+using construction_brazil_server.Interfaces;
 
 namespace construction_brazil_server
 {
@@ -65,6 +66,9 @@ namespace construction_brazil_server
             services.AddScoped<ILoggingTypeRepository, LoggingTypeRepository>();
             services.AddScoped<IProfissionalTypeRepository, ProfissionalTypeRepository>();
             services.AddScoped<ISexoRepository, SexoRepository>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<IContatoRepository, ContatoRepository>();
+            services.AddScoped<IProfissionalRepository, ProfissionalRepository>();
 
             // Injecting Contexts
             services.AddDbContext<ConstructionBrazil_Context>(options =>
