@@ -35,19 +35,19 @@ namespace construction_brazil_server.Entities.Logs
 
         [Column(TypeName = "varchar(500)")]
         [MaxLength(500)]
-        public string Observacoes { get; set; }
+        public string? Observacoes { get; set; }
 
         [Column(TypeName = "varchar(11)")]
         [MaxLength(11)]
-        public string Pis { get; set; }
+        public string? Pis { get; set; }
 
         [Column(TypeName = "varchar(32)")]
         [MaxLength(32)]
-        public string Rg { get; set; }
+        public string? Rg { get; set; }
 
         [Column(TypeName = "varchar(32)")]
         [MaxLength(32)]
-        public string Pix { get; set; }
+        public string? Pix { get; set; }
 
         [Required]
         [Column(TypeName = "bit")]

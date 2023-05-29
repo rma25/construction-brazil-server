@@ -14,13 +14,16 @@ namespace construction_brazil_server.Entities.Static
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long LoggingTypeId { get; set; }
 
+        /// <summary>
+        /// Information, Critical, Elasticsearch
+        /// </summary>
         [Required]
         [Column(TypeName = "varchar(max)")]
         public string Nome { get; set; }
 
         [Column(TypeName = "varchar(256)")]
         [MaxLength(256)]
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
 
         [Required]
         [Column(TypeName = "datetimeoffset(7)")]

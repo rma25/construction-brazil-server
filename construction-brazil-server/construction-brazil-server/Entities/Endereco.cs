@@ -17,24 +17,24 @@ namespace construction_brazil_server.Entities.Logs
         
         [Column(TypeName = "varchar(64)")]
         [MaxLength(64)]
-        public string Rua { get; set; }
+        public string? Rua { get; set; }
        
         [Column(TypeName = "varchar(64)")]
         [MaxLength(64)]
-        public string Complemento { get; set; }
+        public string? Complemento { get; set; }
 
         [Column(TypeName = "varchar(120)")]
         [MaxLength(120)]
-        public string Bairro { get; set; }
+        public string? Bairro { get; set; }
 
         [Column(TypeName = "varchar(85)")]
         [MaxLength(85)]
-        public string Cidade { get; set; }
+        public string? Cidade { get; set; }
 
         [ForeignKey("EstadoId")]
         [Column(TypeName = "bigint")]
-        public long EstadoId { get; set; }
-        public virtual Estado Estado { get; set; }
+        public long? EstadoId { get; set; }
+        public virtual Estado? Estado { get; set; }
 
         [Required]
         [Column(TypeName = "varchar(9)")]
