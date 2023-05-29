@@ -18,13 +18,13 @@ namespace construction_brazil_server.Controllers
             _contatoRepo = contatoRepo;
         }
 
-        [HttpGet("cpf/{cpf}/IsCpfUnique")]
-        public async Task<ActionResult> IsCpfUnique([FromRoute] string cpf)
+        [HttpGet("cpf/{cpf}/contato/{id}/IsCpfUnique")]
+        public async Task<ActionResult> IsCpfUnique([FromRoute] string cpf, [FromRoute] long id)
         {
             if (string.IsNullOrEmpty(cpf))
                 return HandleBadRequest(nameof(cpf));
 
-            return Ok(await _contatoRepo.IsCpfUniqueAsync(cpf));
+            return Ok(await _contatoRepo.IsCpfUniqueAsync(cpf, id));
         }
 
     }
