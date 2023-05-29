@@ -16,7 +16,6 @@ namespace construction_brazil_server.Controllers.Static
             _profissionalTypeRepo = profissionalTypeRepo;
         }
 
-
         [HttpGet]
         public async Task<ActionResult> Get()
         {

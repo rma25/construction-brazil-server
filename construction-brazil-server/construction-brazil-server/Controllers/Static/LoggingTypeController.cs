@@ -16,7 +16,6 @@ namespace construction_brazil_server.Controllers.Static
             _loggingTypeRepo = loggingTypeRepo;
         }
 
-
         [HttpGet]
         public async Task<ActionResult> Get()
         {

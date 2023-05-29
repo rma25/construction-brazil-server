@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using construction_brazil_server.Extensions.DepedencyInjection;
 using System.Reflection;
 using construction_brazil_server.Interfaces.Shared;
+using construction_brazil_server.Interfaces.Static;
 
 namespace construction_brazil_server
 {
@@ -51,16 +52,11 @@ namespace construction_brazil_server
             services.AddSingleton(_appConfig.ConnectionStrings);
             services.AddSingleton(_appConfig.Elasticsearch);
 
-            // Shared IRepository
-            var assembly = Assembly.GetEntryAssembly();
-
-            if (assembly != null)
-            {
-                assembly.GetTypesAssignableFrom<IRepository>().ForEach((type) =>
-                {
-                    services.AddScoped(typeof(IRepository), type);
-                }); 
-            }
+            services.AddScoped<IDddRepository, DddRepository>();
+            services.AddScoped<IEstadoRepository, EstadoRepository>();
+            services.AddScoped<ILoggingTypeRepository, LoggingTypeRepository>();
+            services.AddScoped<IProfissionalTypeRepository, ProfissionalTypeRepository>();
+            services.AddScoped<ISexoRepository, SexoRepository>();
 
             // Injecting Contexts
             services.AddDbContext<ConstructionBrazil_Context>(options =>

@@ -16,7 +16,6 @@ namespace construction_brazil_server.Controllers.Static
             _estadoRepo = estadoRepo;
         }
 
-
         [HttpGet]
         public async Task<ActionResult> Get()
         {
