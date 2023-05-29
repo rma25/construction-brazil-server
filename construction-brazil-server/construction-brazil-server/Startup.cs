@@ -110,11 +110,11 @@ namespace construction_brazil_server
 
             app.UseCors("CorsPolicy");
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SINPROEGO");
-            });
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SINPROEGO");
+            //});
 
             Log.Logger.Information("Begining data seeding...");
 
