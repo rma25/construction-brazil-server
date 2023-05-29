@@ -7,7 +7,7 @@ using System.Text;
 
 namespace EEPServer.Services
 {
-    public class RemoteDataService : IRemoteDataService, IRepository
+    public class RemoteDataService : IRemoteDataService
     {
         private readonly IAppCache _cache;
 

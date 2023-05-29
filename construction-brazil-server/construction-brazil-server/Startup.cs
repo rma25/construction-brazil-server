@@ -11,6 +11,10 @@ using construction_brazil_server.Extensions.DepedencyInjection;
 using System.Reflection;
 using construction_brazil_server.Interfaces.Shared;
 using construction_brazil_server.Interfaces.Static;
+using construction_brazil_server.Interfaces.Services;
+using construction_brazil_server.Services;
+using EEPServer.Interfaces;
+using EEPServer.Services;
 
 namespace construction_brazil_server
 {
@@ -54,6 +58,8 @@ namespace construction_brazil_server
             services.AddSingleton(_appConfig.CorsPolicy);
             services.AddSingleton(_appConfig.StorageAccount);
 
+            services.AddScoped<ILogService, LogService>();
+            services.AddScoped<IRemoteDataService, RemoteDataService>();
             services.AddScoped<IDddRepository, DddRepository>();
             services.AddScoped<IEstadoRepository, EstadoRepository>();
             services.AddScoped<ILoggingTypeRepository, LoggingTypeRepository>();
