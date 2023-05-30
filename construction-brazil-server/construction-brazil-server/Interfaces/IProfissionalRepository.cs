@@ -18,7 +18,7 @@ namespace construction_brazil_server.Interfaces
         /// </summary>
         /// <param name="filter">Filters the collections</param>
         /// <returns>Collection of Admin Profissionals</returns>
-        public Task<IEnumerable<ViewAdminProfissionalDto>> GetAdminPageAsync(ProfissionalAdminFilterDto filter);
+        public Task<IEnumerable<AdminProfissionalDto>> GetAdminPageAsync(ProfissionalAdminFilterDto filter);
 
         /// <summary>
         /// Gets total count of all admins based on the filter
