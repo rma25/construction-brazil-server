@@ -67,9 +67,9 @@ namespace construction_brazil_server.Interfaces
             var isUnique = false;
 
             if (contatoId > 0)
-                isUnique = await _context.Contatos.AnyAsync(x => x.Cpf.ToLower() == cpf.ToLower() && x.ContatoId == contatoId);
+                isUnique = !await _context.Contatos.AnyAsync(x => x.Cpf.ToLower() == cpf.ToLower() && x.ContatoId == contatoId);
             else
-                isUnique = await _context.Contatos.AnyAsync(x => x.Cpf.ToLower() == cpf.ToLower());
+                isUnique = !await _context.Contatos.AnyAsync(x => x.Cpf.ToLower() == cpf.ToLower());
 
             return isUnique;
         }
