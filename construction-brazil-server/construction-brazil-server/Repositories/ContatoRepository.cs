@@ -64,12 +64,17 @@ namespace construction_brazil_server.Interfaces
             if (string.IsNullOrEmpty(cpf))
                 throw new ArgumentNullException(nameof(cpf));
 
-            var isUnique = false;
+            var loweredCpf = cpf.ToLower();
 
+            var isUnique = !await _context.Contatos.AnyAsync(x => x.Cpf.ToLower() == cpf.ToLower());
+            
             if (contatoId > 0)
-                isUnique = !await _context.Contatos.AnyAsync(x => x.Cpf.ToLower() == cpf.ToLower() && x.ContatoId == contatoId);
-            else
-                isUnique = !await _context.Contatos.AnyAsync(x => x.Cpf.ToLower() == cpf.ToLower());
+            {
+                var cpfFound = _context.Contatos.FirstOrDefault(x => x.ContatoId == contatoId)?.Cpf?.ToLower() ?? "";
+
+                // Check to make sure it's not checking against itself
+                isUnique = cpfFound == cpf.ToLower();
+            }
 
             return isUnique;
         }

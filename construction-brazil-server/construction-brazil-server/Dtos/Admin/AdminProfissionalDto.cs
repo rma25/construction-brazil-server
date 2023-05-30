@@ -30,5 +30,9 @@ namespace construction_brazil_server.Dtos.Admin
 
         [Required]
         public long ProfissionalTypeId { get; init; }
+
+        public DateTimeOffset Criado { get; init; }
+
+        public DateTimeOffset? Modificado { get; init; }
     }
 }

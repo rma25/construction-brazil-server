@@ -68,13 +68,13 @@ namespace construction_brazil_server.Interfaces
             if (profissionalFound == null)
                 throw new ArgumentNullException(nameof(profissionalFound));
 
-            await _contatoRepo.DeleteAsync(profissionalFound.ContatoId);
-            await _enderecoRepo.DeleteAsync(profissionalFound.EnderecoId);
-
             _context.Entry(profissionalFound).State = EntityState.Deleted;
             _context.Profissionals.Remove(profissionalFound);
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
+
+            await _contatoRepo.DeleteAsync(profissionalFound.ContatoId);
+            await _enderecoRepo.DeleteAsync(profissionalFound.EnderecoId);
         }
 
         public async Task<IEnumerable<AdminProfissionalDto>> GetAdminPageAsync(ProfissionalAdminFilterDto filter)
@@ -117,7 +117,9 @@ namespace construction_brazil_server.Interfaces
                                     Cidade = x.Endereco.Cidade,
                                     Complemento = x.Endereco.Complemento,
                                     Rua = x.Endereco.Rua
-                                }
+                                },
+                                Criado = x.Criado,
+                                Modificado = x.Modificado
                             })
                             .ToListAsync();
 
