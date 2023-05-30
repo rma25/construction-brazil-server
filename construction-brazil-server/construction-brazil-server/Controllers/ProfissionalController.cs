@@ -55,7 +55,7 @@ namespace construction_brazil_server.Controllers
 
             await _profissionalRepo.UpdateAsync(profissional);
 
-            return Ok();
+            return Ok(true);
         }
 
         [HttpDelete("id/{id}/Delete")]
@@ -68,7 +68,7 @@ namespace construction_brazil_server.Controllers
 
             await _profissionalRepo.DeleteAsync(id);
 
-            return Ok();
+            return Ok(true);
         }
     }
 }
