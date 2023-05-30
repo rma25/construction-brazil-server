@@ -4,8 +4,8 @@
     {
         public int TotalPerPage { get; init; }
         public int CurrentPage { get; init; }
-        public string SearchText { get; init; }
-        public DateTimeOffset StartedOn { get; init; }
-        public DateTimeOffset EndedOn { get; init; }
+        public string? SearchText { get; init; }
+        public DateTimeOffset? StartedOn { get; init; }
+        public DateTimeOffset? EndedOn { get; init; }
     }
 }
