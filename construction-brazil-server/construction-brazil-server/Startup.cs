@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Http.Features;
 using System.IdentityModel.Tokens.Jwt;
 using Serilog;
@@ -7,9 +6,6 @@ using construction_brazil_server.DataStores;
 using Serilog.Events;
 using construction_brazil_server.Extensions.DataStores;
 using Newtonsoft.Json;
-using construction_brazil_server.Extensions.DepedencyInjection;
-using System.Reflection;
-using construction_brazil_server.Interfaces.Shared;
 using construction_brazil_server.Interfaces.Static;
 using construction_brazil_server.Interfaces.Services;
 using construction_brazil_server.Services;
