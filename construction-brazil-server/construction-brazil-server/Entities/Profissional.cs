@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace construction_brazil_server.Entities.Logs
 {
-    [Index(nameof(ProfissionalTypeId), nameof(ContatoId), nameof(EnderecoId), nameof(Criado), IsUnique = false)]
+    [Index(nameof(Criado), IsUnique = false)]
     [Table("Profissionals", Schema = "dbo")]
     public class Profissional
     {

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace construction_brazil_server.Entities.Logs
 {    
-    [Index(nameof(LoggingTypeId), nameof(Criado), IsUnique = false)]
+    [Index(nameof(Criado), IsUnique = false)]
     [Table("ApplicationLoggings", Schema = "dbo")]
     public class ApplicationLogging
     {
