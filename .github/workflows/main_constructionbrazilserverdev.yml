@@ -25,10 +25,10 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
         
-      - name: SourcesDirectory = $(Build.SourcesDirectory)
+      - name: $(Build.SourcesDirectory)
       
       - name: dotnet publish
-        run: dotnet publish -c Release -o ../construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj
+        run: dotnet publish -c Release -o $(Build.SourcesDirectory)/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
