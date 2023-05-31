@@ -43,6 +43,7 @@ namespace construction_brazil_server.Interfaces
                                                         || x.Endereco.Cep.ToLower().Contains(loweredText)
                                                         || (x.Endereco.Cidade != null && x.Endereco.Cidade.ToLower().Contains(loweredText))
                                                         || (x.Endereco.Estado != null && x.Endereco.Estado.Nome.ToLower().Contains(loweredText))
+                                                        || (x.Endereco.Estado != null && x.Endereco.Estado.Uf.ToLower().Contains(loweredText))
                                                         || (x.Pis != null && x.Pis.ToLower().Contains(loweredText))
                                                         || (x.Pix != null && x.Pix.ToLower().Contains(loweredText)));
             }
