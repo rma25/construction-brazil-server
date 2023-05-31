@@ -75,8 +75,7 @@ namespace construction_brazil_server.Interfaces
             if (endereco.EstadoId > 0)
                 enderecoFound.EstadoId = endereco.EstadoId;
 
-            _context.Entry(enderecoFound).State = EntityState.Modified;
-            _context.Enderecos.Add(enderecoFound);
+            _context.Entry(enderecoFound).State = EntityState.Modified;            
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
         }

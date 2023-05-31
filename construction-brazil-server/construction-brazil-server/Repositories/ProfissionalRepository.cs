@@ -195,7 +195,6 @@ namespace construction_brazil_server.Interfaces
                 profissionalFound.ProfissionalTypeId = profissional.ProfissionalTypeId;
 
             _context.Entry(profissionalFound).State = EntityState.Modified;
-            _context.Profissionals.Add(profissionalFound);
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
         }

@@ -103,8 +103,7 @@ namespace construction_brazil_server.Interfaces
             if (contato.SexoId > 0)
                 contatoFound.SexoId = contato.SexoId;
 
-            _context.Entry(contatoFound).State = EntityState.Modified;
-            _context.Contatos.Add(contatoFound);
+            _context.Entry(contatoFound).State = EntityState.Modified;            
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
         }
