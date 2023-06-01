@@ -31,10 +31,10 @@ jobs:
           include-prerelease: true      
         
       - name: dotnet Restore
-        run: dotnet restore ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet restore ${{env.DOTNET_ROOT}}/construction-brazil-server
         
       - name: dotnet Build
-        run: dotnet build --configuration Release ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet build --configuration Release ${{env.DOTNET_ROOT}}/construction-brazil-server
         
       - name: dotnet Publish
         run: dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/construction-brazil-server' 
