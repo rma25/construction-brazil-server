@@ -29,7 +29,7 @@ namespace construction_brazil_server.Interfaces
             _context.ChangeTracker.Clear();
         }
 
-        public async Task<long> InsertAsync(AdminEnderecoDto endereco)
+        public async Task<long> InsertAsync(AdminEnderecoDto? endereco)
         {
             if (endereco == null)
                 throw new ArgumentNullException(nameof(endereco));
@@ -55,7 +55,7 @@ namespace construction_brazil_server.Interfaces
             return newEndereco.EnderecoId;
         }
 
-        public async Task UpdateAsync(AdminEnderecoDto endereco)
+        public async Task UpdateAsync(AdminEnderecoDto? endereco)
         {
             if (endereco == null)
                 throw new ArgumentNullException(nameof(endereco));
@@ -75,7 +75,7 @@ namespace construction_brazil_server.Interfaces
             if (endereco.EstadoId > 0)
                 enderecoFound.EstadoId = endereco.EstadoId;
 
-            _context.Entry(enderecoFound).State = EntityState.Modified;            
+            _context.Entry(enderecoFound).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
         }

@@ -23,10 +23,10 @@ namespace construction_brazil_server.Dtos.Admin
         public bool Sindicalizado { get; init; }
 
         [Required]
-        public AdminContatoDto Contato { get; init; }
+        public AdminContatoDto? Contato { get; init; }
 
         [Required]
-        public AdminEnderecoDto Endereco { get; init; }
+        public AdminEnderecoDto? Endereco { get; init; }
 
         [Required]
         public long ProfissionalTypeId { get; init; }

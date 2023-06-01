@@ -17,8 +17,8 @@ namespace construction_brazil_server.Controllers.Error
         public IActionResult AppException()
         {
             // Get the exception
-            IExceptionHandlerFeature context = HttpContext.Features.Get<IExceptionHandlerFeature>();
-            Exception ex = context?.Error;
+            var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
+            var ex = context?.Error;
 
             // Log the exception (if you have the stack trace you don't need to separately log the
             // class and method that threw the exception, you can find that in the stack trace.
@@ -26,9 +26,7 @@ namespace construction_brazil_server.Controllers.Error
                 _logService.LogCritical(ex.Message, ex);
 
             // return a vague error message
-            return Problem(
-                detail: "A problem occurred while handling your request.",
-                title: "Error");
+            return Problem(detail: "A problem occurred while handling your request.", title: "Error");
         }
 
         [Route("LocalAppException")]
@@ -36,11 +34,9 @@ namespace construction_brazil_server.Controllers.Error
         {
             // This isn't in production, no need to log it to the database.  Let's just return it
             // so that we can see the error and fix it.
-            IExceptionHandlerFeature context = HttpContext.Features.Get<IExceptionHandlerFeature>();
+            var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
 
-            return Problem(
-                detail: context.Error.StackTrace,
-                title: context.Error.Message);
+            return Problem(detail: context?.Error?.StackTrace ?? "", title: context?.Error?.Message ?? "");
         }
     }
 

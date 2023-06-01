@@ -9,6 +9,12 @@ namespace construction_brazil_server.Entities.Static
     [Table("Estados", Schema = "dbo")]
     public class Estado
     {
+        public Estado()
+        {
+            Nome = string.Empty;
+            Uf = string.Empty;
+        }
+
         [Key]
         [Column(TypeName = "bigint", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

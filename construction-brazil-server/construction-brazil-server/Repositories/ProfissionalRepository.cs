@@ -28,22 +28,23 @@ namespace construction_brazil_server.Interfaces
             var profissionals = _context.Profissionals
                                         .Include(x => x.Contato)
                                         .Include(x => x.Endereco)
-                                        .ThenInclude(x => x.Estado)
+                                        // EF Core will not include the null, this is to avoid an object reference exception
+                                        .ThenInclude(x => x != null ? x.Estado : null)
                                         .Where(x => (startedOn <= x.Criado.Date && x.Criado.Date <= endedOn)
-                                                    || (startedOn <= x.Contato.DataDeNascimento.Date && x.Contato.DataDeNascimento.Date <= endedOn));
+                                                    || (x.Contato != null && startedOn <= x.Contato.DataDeNascimento.Date && x.Contato.DataDeNascimento.Date <= endedOn));
 
             if (!string.IsNullOrEmpty(filter.SearchText))
             {
                 var loweredText = filter.SearchText.ToLower();
 
-                profissionals = profissionals.Where(x => x.Contato.Cpf.ToLower().Contains(loweredText)
+                profissionals = profissionals.Where(x => (x.Contato != null && (x.Contato.Cpf.ToLower().Contains(loweredText)
                                                         || x.Contato.Nome.ToLower().Contains(loweredText)
                                                         || x.Contato.Sobrenome.ToLower().Contains(loweredText)
-                                                        || (x.Contato.Telefone != null && x.Contato.Telefone.ToLower().Contains(loweredText))
-                                                        || x.Endereco.Cep.ToLower().Contains(loweredText)
+                                                        || (x.Contato.Telefone != null && x.Contato.Telefone.ToLower().Contains(loweredText))))
+                                                        || (x.Endereco != null && (x.Endereco.Cep.ToLower().Contains(loweredText)
                                                         || (x.Endereco.Cidade != null && x.Endereco.Cidade.ToLower().Contains(loweredText))
                                                         || (x.Endereco.Estado != null && x.Endereco.Estado.Nome.ToLower().Contains(loweredText))
-                                                        || (x.Endereco.Estado != null && x.Endereco.Estado.Uf.ToLower().Contains(loweredText))
+                                                        || (x.Endereco.Estado != null && x.Endereco.Estado.Uf.ToLower().Contains(loweredText))))
                                                         || (x.Pis != null && x.Pis.ToLower().Contains(loweredText))
                                                         || (x.Pix != null && x.Pix.ToLower().Contains(loweredText)));
             }
@@ -96,7 +97,7 @@ namespace construction_brazil_server.Interfaces
                                 Pix = x.Pix,
                                 Rg = x.Rg,
                                 ProfissionalTypeId = x.ProfissionalTypeId,
-                                Contato = new AdminContatoDto
+                                Contato = x.Contato != null ? new AdminContatoDto
                                 {
                                     Id = x.ContatoId,
                                     Cpf = x.Contato.Cpf,
@@ -108,8 +109,8 @@ namespace construction_brazil_server.Interfaces
                                     Sobrenome = x.Contato.Sobrenome,
                                     Telefone = x.Contato.Telefone,
                                     Email = x.Contato.Email
-                                },
-                                Endereco = new AdminEnderecoDto
+                                } : null,
+                                Endereco = x.Endereco != null ? new AdminEnderecoDto
                                 {
                                     Id = x.EnderecoId,
                                     EstadoId = x.Endereco.EstadoId,
@@ -118,7 +119,7 @@ namespace construction_brazil_server.Interfaces
                                     Cidade = x.Endereco.Cidade,
                                     Complemento = x.Endereco.Complemento,
                                     Rua = x.Endereco.Rua
-                                },
+                                } : null,
                                 Criado = x.Criado,
                                 Modificado = x.Modificado
                             })

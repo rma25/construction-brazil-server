@@ -9,6 +9,11 @@ namespace construction_brazil_server.Entities.Static
     [Table("Sexos", Schema = "dbo")]
     public class Sexo
     {
+        public Sexo()
+        {
+            Tipo = string.Empty;
+        }
+
         [Key]
         [Column(TypeName = "bigint", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

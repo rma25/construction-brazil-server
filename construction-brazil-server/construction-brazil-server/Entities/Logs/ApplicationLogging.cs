@@ -10,6 +10,11 @@ namespace construction_brazil_server.Entities.Logs
     [Table("ApplicationLoggings", Schema = "dbo")]
     public class ApplicationLogging
     {
+        public ApplicationLogging()
+        {
+            Mensagem = string.Empty;
+        }
+
         [Key]
         [Column(TypeName = "bigint", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,25 +25,25 @@ namespace construction_brazil_server.Entities.Logs
         [ForeignKey("LoggingTypeId")]
         [Column(TypeName = "bigint")]
         public long LoggingTypeId { get; set; }
-        public virtual LoggingType LoggingType { get; set; }
+        public virtual LoggingType? LoggingType { get; set; }
 
         //Many-To-One
         [ForeignKey("ExceptionLoggingId")]
         [Column(TypeName = "bigint")]
         public long? ExceptionLoggingId { get; set; }
-        public virtual ExceptionLogging ExceptionLogging { get; set; }
+        public virtual ExceptionLogging? ExceptionLogging { get; set; }
 
         [Required]
         [Column(TypeName = "varchar(max)")]
-        public string Mensagem { get; set; }
+        public string? Mensagem { get; set; }
 
         [Column(TypeName = "varchar(128)")]
         [MaxLength(128)]
-        public string ControllerName { get; set; }
+        public string? ControllerName { get; set; }
 
         [Column(TypeName = "varchar(100)")]
         [MaxLength(100)]
-        public string MethodName { get; set; }
+        public string? MethodName { get; set; }
 
         [Required]
         [Column(TypeName = "datetimeoffset(7)")]

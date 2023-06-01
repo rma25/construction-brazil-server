@@ -29,7 +29,7 @@ namespace construction_brazil_server.Interfaces
             _context.ChangeTracker.Clear();
         }
 
-        public async Task<long> InsertAsync(AdminContatoDto contato)
+        public async Task<long> InsertAsync(AdminContatoDto? contato)
         {
             if (contato == null)
                 throw new ArgumentNullException(nameof(contato));
@@ -67,7 +67,7 @@ namespace construction_brazil_server.Interfaces
             var loweredCpf = cpf.ToLower();
 
             var isUnique = !await _context.Contatos.AnyAsync(x => x.Cpf.ToLower() == cpf.ToLower());
-            
+
             if (contatoId > 0)
             {
                 var cpfFound = _context.Contatos.FirstOrDefault(x => x.ContatoId == contatoId)?.Cpf?.ToLower() ?? "";
@@ -79,7 +79,7 @@ namespace construction_brazil_server.Interfaces
             return isUnique;
         }
 
-        public async Task UpdateAsync(AdminContatoDto contato)
+        public async Task UpdateAsync(AdminContatoDto? contato)
         {
             if (contato == null)
                 throw new ArgumentNullException(nameof(contato));
@@ -103,7 +103,7 @@ namespace construction_brazil_server.Interfaces
             if (contato.SexoId > 0)
                 contatoFound.SexoId = contato.SexoId;
 
-            _context.Entry(contatoFound).State = EntityState.Modified;            
+            _context.Entry(contatoFound).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
         }

@@ -10,6 +10,13 @@ namespace construction_brazil_server.Entities.Logs
     [Table("Contatos", Schema = "dbo")]
     public class Contato
     {
+        public Contato()
+        {
+            Nome = string.Empty;
+            Sobrenome = string.Empty;
+            Cpf = string.Empty;
+        }
+
         [Key]
         [Column(TypeName = "bigint", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -56,7 +63,7 @@ namespace construction_brazil_server.Entities.Logs
         [ForeignKey("SexoId")]
         [Column(TypeName = "bigint")]
         public long SexoId { get; set; }
-        public virtual Sexo Sexo { get; set; }
+        public virtual Sexo? Sexo { get; set; }
 
         [ForeignKey("DddId")]
         [Column(TypeName = "bigint")]

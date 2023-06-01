@@ -10,19 +10,19 @@ namespace construction_brazil_server.Services
     public class LogService : ILogService
     {
         private readonly ILogger<LogService> _logger;
+        private readonly ConstructionBrazil_Context _context;
         protected readonly AppConfig _appConfig;
 
-        public LogService(ILogger<LogService> logger, AppConfig appConfig)
+        public LogService(ILogger<LogService> logger, AppConfig appConfig, ConstructionBrazil_Context context)
         {
             _logger = logger;
             _appConfig = appConfig;
+            _context = context;
         }
 
         protected bool DoesLogTypeExists(long logTypeId)
         {
-            using var context = new ConstructionBrazil_Context(_appConfig.ConnectionStrings.DefaultConnection);
-
-            return context.LoggingTypes.Any(x => x.LoggingTypeId == logTypeId);
+            return _context.LoggingTypes.Any(x => x.LoggingTypeId == logTypeId);
         }
 
 
@@ -36,8 +36,6 @@ namespace construction_brazil_server.Services
             if (ex == null)
                 throw new ArgumentNullException(nameof(ex));
 
-            using var context = new ConstructionBrazil_Context(_appConfig.ConnectionStrings.DefaultConnection);
-
             var newException = new ExceptionLogging()
             {
                 Message = ex.Message,
@@ -47,12 +45,12 @@ namespace construction_brazil_server.Services
                 Type = ex.GetType().ToString()
             };
 
-            context.ExceptionLoggings.Add(newException);
-            context.Entry(newException).State = EntityState.Added;
+            _context.ExceptionLoggings.Add(newException);
+            _context.Entry(newException).State = EntityState.Added;
 
-            context.SaveChanges();
+            _context.SaveChanges();
 
-            context.ChangeTracker.Clear();
+            _context.ChangeTracker.Clear();
 
             return newException.ExceptionLoggingId;
         }
@@ -67,9 +65,7 @@ namespace construction_brazil_server.Services
             // Log on the server
             _logger.LogError(ex, message);
 
-            using var context = new ConstructionBrazil_Context(_appConfig.ConnectionStrings.DefaultConnection);
-
-            var logTypeId = context.LoggingTypes.FirstOrDefault(x => x.Nome.ToLower() == EntityConstants.ApplicationLoggingTypeConstants.Critical.ToLower())?.LoggingTypeId ?? 0;
+            var logTypeId = _context.LoggingTypes.FirstOrDefault(x => x.Nome.ToLower() == EntityConstants.ApplicationLoggingTypeConstants.Critical.ToLower())?.LoggingTypeId ?? 0;
 
             if (!DoesLogTypeExists(logTypeId))
                 throw new ArgumentException($"{nameof(logTypeId)} = {logTypeId} can't be found.");
@@ -88,12 +84,12 @@ namespace construction_brazil_server.Services
             if (!string.IsNullOrEmpty(methodName))
                 newLog.MethodName = methodName;
 
-            context.ApplicationLoggings.Add(newLog);
-            context.Entry(newLog).State = EntityState.Added;
+            _context.ApplicationLoggings.Add(newLog);
+            _context.Entry(newLog).State = EntityState.Added;
 
-            context.SaveChanges();
+            _context.SaveChanges();
 
-            context.ChangeTracker.Clear();
+            _context.ChangeTracker.Clear();
         }
 
         public void LogInformation(string message, string controllerName = "", [CallerMemberName] string methodName = "")
@@ -103,9 +99,7 @@ namespace construction_brazil_server.Services
 
             _logger.LogInformation(message);
 
-            using var context = new ConstructionBrazil_Context(_appConfig.ConnectionStrings.DefaultConnection);
-
-            var logTypeId = context.LoggingTypes.FirstOrDefault(x => x.Nome.ToLower() == EntityConstants.ApplicationLoggingTypeConstants.Information.ToLower())?.LoggingTypeId ?? 0;
+            var logTypeId = _context.LoggingTypes.FirstOrDefault(x => x.Nome.ToLower() == EntityConstants.ApplicationLoggingTypeConstants.Information.ToLower())?.LoggingTypeId ?? 0;
 
             if (!DoesLogTypeExists(logTypeId))
                 throw new ArgumentException($"{nameof(logTypeId)} = {logTypeId} can't be found.");
@@ -121,12 +115,12 @@ namespace construction_brazil_server.Services
             if (!string.IsNullOrEmpty(methodName))
                 newLog.MethodName = methodName;
 
-            context.ApplicationLoggings.Add(newLog);
-            context.Entry(newLog).State = EntityState.Added;
+            _context.ApplicationLoggings.Add(newLog);
+            _context.Entry(newLog).State = EntityState.Added;
 
-            context.SaveChanges();
+            _context.SaveChanges();
 
-            context.ChangeTracker.Clear();
+            _context.ChangeTracker.Clear();
         }
 
     }

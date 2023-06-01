@@ -10,6 +10,11 @@ namespace construction_brazil_server.Entities.Logs
     [Table("Enderecos", Schema = "dbo")]
     public class Endereco
     {
+        public Endereco()
+        {
+            Cep = string.Empty;
+        }
+
         [Key]
         [Column(TypeName = "bigint", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

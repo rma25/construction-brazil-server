@@ -2,24 +2,32 @@
 {
     public class AppConfig
     {
-        public class ConnectionStringsConfig
+        public AppConfig()
         {
-            public string DefaultConnection { get; set; }
+            ConnectionStrings = new ConnectionStringsConfig();
+            ElasticConfig = new ElasticsearchConfig();
+            StorageAccount = new StorageAccountConfig();
+            CorsPolicy = new CorsPolicyConfig();
+        }
+
+        public class ConnectionStringsConfig
+        {            
+            public string? DefaultConnection { get; set; }
             public int ConnectionTimeout { get; set; }
         }
 
         public class ElasticsearchConfig
         {
-            public Uri Uri { get; set; }
-            public string Username { get; set; }
-            public string Password { get; set; }
+            public Uri? Uri { get; set; }
+            public string? Username { get; set; }
+            public string? Password { get; set; }
             public int TimeoutMinutes { get; set; }
         }
 
         public class StorageAccountConfig
         {
-            public string ConnectionString { get; set; }
-            public string ContainerName { get; set; }
+            public string? ConnectionString { get; set; }
+            public string? ContainerName { get; set; }
         }
 
         public class CorsPolicyConfig
@@ -29,7 +37,7 @@
 
         #region Properties
         public ConnectionStringsConfig ConnectionStrings { get; set; }
-        public ElasticsearchConfig Elasticsearch { get; set; }
+        public ElasticsearchConfig ElasticConfig { get; set; }
         public StorageAccountConfig StorageAccount { get; set; }
         public CorsPolicyConfig CorsPolicy { get; set; }
         #endregion

@@ -9,6 +9,11 @@ namespace construction_brazil_server.Entities.Static
     [Table("ProfissionalTypes", Schema = "dbo")]
     public class ProfissionalType
     {
+        public ProfissionalType()
+        {
+            Tipo = string.Empty;
+        }
+
         [Key]
         [Column(TypeName = "bigint", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

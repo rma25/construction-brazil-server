@@ -19,19 +19,19 @@ namespace construction_brazil_server.Entities.Logs
         [ForeignKey("ProfissionalTypeId")]
         [Column(TypeName = "bigint")]
         public long ProfissionalTypeId { get; set; }
-        public virtual ProfissionalType ProfissionalType { get; set; }
+        public virtual ProfissionalType? ProfissionalType { get; set; }
 
         [Required]
         [ForeignKey("EstadoId")]
         [Column(TypeName = "bigint")]
         public long ContatoId { get; set; }
-        public virtual Contato Contato { get; set; }
+        public virtual Contato? Contato { get; set; }
 
         [Required]
         [ForeignKey("EnderecoId")]
         [Column(TypeName = "bigint")]
         public long EnderecoId { get; set; }
-        public virtual Endereco Endereco { get; set; }
+        public virtual Endereco? Endereco { get; set; }
 
         [Column(TypeName = "varchar(500)")]
         [MaxLength(500)]

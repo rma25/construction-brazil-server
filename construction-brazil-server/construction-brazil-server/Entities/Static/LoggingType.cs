@@ -9,6 +9,11 @@ namespace construction_brazil_server.Entities.Static
     [Table("LoggingTypes", Schema = "dbo")]
     public class LoggingType
     {
+        public LoggingType()
+        {
+            Nome = string.Empty;
+        }
+
         [Key]
         [Column(TypeName = "bigint", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

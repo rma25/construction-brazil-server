@@ -6,7 +6,7 @@ namespace construction_brazil_server.DataStores
 {
     public partial class ConstructionBrazil_Context : DbContext
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = string.Empty;
         public ConstructionBrazil_Context(string connectionString)
         {
             _connectionString = connectionString;

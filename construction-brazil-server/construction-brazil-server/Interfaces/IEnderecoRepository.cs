@@ -10,14 +10,14 @@ namespace construction_brazil_server.Interfaces
         /// </summary>
         /// <param name="endereco"></param>
         /// <returns></returns>
-        public Task UpdateAsync(AdminEnderecoDto endereco);
+        public Task UpdateAsync(AdminEnderecoDto? endereco);
 
         /// <summary>
         /// Adds a new Endereco
         /// </summary>
         /// <param name="endereco"></param>
         /// <returns>New Endereco Id</returns>
-        public Task<long> InsertAsync(AdminEnderecoDto endereco);
+        public Task<long> InsertAsync(AdminEnderecoDto? endereco);
 
         /// <summary>
         /// Deletes the Endereco based on the Id

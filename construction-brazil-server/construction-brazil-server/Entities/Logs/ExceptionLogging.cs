@@ -9,6 +9,13 @@ namespace construction_brazil_server.Entities.Logs
     [Table("ExceptionLoggings", Schema = "dbo")]
     public class ExceptionLogging
     {
+        public ExceptionLogging()
+        {
+            Message = string.Empty;
+            StackTrace = string.Empty;
+            Type = string.Empty;
+        }
+
         [Key]
         [Column(TypeName = "bigint", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,15 +26,14 @@ namespace construction_brazil_server.Entities.Logs
         public string Message { get; set; }
 
         [Column(TypeName = "varchar(max)")]
-        public string InnerExceptionMessage { get; set; }
+        public string? InnerExceptionMessage { get; set; }
 
-        [Required]
         [Column(TypeName = "varchar(max)")]
-        public string StackTrace { get; set; }
-        
+        public string? StackTrace { get; set; }
+
         [Column(TypeName = "varchar(256)")]
         [MaxLength(256)]
-        public string Source { get; set; }
+        public string? Source { get; set; }
 
         [Required]
         [Column(TypeName = "varchar(256)")]

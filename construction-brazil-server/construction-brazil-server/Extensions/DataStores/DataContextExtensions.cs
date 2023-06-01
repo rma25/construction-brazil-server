@@ -82,10 +82,10 @@ namespace construction_brazil_server.Extensions.DataStores
         private static List<LoggingType> GetLoggingTypes()
         {
             var logTypes = typeof(EntityConstants.ApplicationLoggingTypeConstants)
-                                  .GetFields()
+                                  .GetFields()                                  
                                   .Select(logType => new LoggingType()
                                   {
-                                      Nome = logType.GetValue(null).ToString(),
+                                      Nome = logType?.GetValue(null)?.ToString() ?? "",
                                       Descricao = "Isso serve para ajudar a identificar o tipo de log",
                                       Criado = DateTimeOffset.UtcNow
                                   })

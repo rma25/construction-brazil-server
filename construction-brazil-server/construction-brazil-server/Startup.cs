@@ -17,13 +17,16 @@ namespace construction_brazil_server
 {
     public partial class Startup
     {
-        private readonly AppConfig _appConfig;
+        private readonly AppConfig _appConfig = new AppConfig();
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            _appConfig = configuration.Get<AppConfig>();
+            _appConfig = configuration.Get<AppConfig>() ?? new AppConfig();
+
+            if (_appConfig == null)
+                Log.Logger.Fatal($"App Config is null.");
 
             Log.Logger = new LoggerConfiguration()
                         .MinimumLevel.Verbose()
@@ -51,7 +54,7 @@ namespace construction_brazil_server
             services.AddSingleton(Log.Logger);
             services.AddSingleton(_appConfig);
             services.AddSingleton(_appConfig.ConnectionStrings);
-            services.AddSingleton(_appConfig.Elasticsearch);
+            services.AddSingleton(_appConfig.ElasticConfig);
             services.AddSingleton(_appConfig.CorsPolicy);
             services.AddSingleton(_appConfig.StorageAccount);
 

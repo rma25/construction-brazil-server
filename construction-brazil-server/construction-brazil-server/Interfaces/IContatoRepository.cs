@@ -18,14 +18,14 @@ namespace construction_brazil_server.Interfaces
         /// </summary>
         /// <param name="contato"></param>
         /// <returns></returns>
-        public Task UpdateAsync(AdminContatoDto contato);
+        public Task UpdateAsync(AdminContatoDto? contato);
 
         /// <summary>
         /// Adds a new contato
         /// </summary>
         /// <param name="contato"></param>
         /// <returns>New Contato Id</returns>
-        public Task<long> InsertAsync(AdminContatoDto contato);
+        public Task<long> InsertAsync(AdminContatoDto? contato);
 
         /// <summary>
         /// Deletes contato based on the id

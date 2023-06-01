@@ -4,6 +4,13 @@ namespace construction_brazil_server.Dtos.Admin
 {
     public class AdminContatoDto
     {
+        public AdminContatoDto()
+        {
+            Nome = string.Empty;
+            Sobrenome = string.Empty;
+            Cpf = string.Empty;
+        }
+
         public long Id { get; init; }
 
         [Required]
@@ -12,7 +19,7 @@ namespace construction_brazil_server.Dtos.Admin
 
         [Required]
         [MaxLength(100)]
-        public string Sobrenome { get; init; }    
+        public string Sobrenome { get; init; }
 
         [Required]
         [MaxLength(14)]

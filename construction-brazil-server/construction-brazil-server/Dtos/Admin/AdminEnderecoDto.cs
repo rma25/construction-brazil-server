@@ -4,6 +4,11 @@ namespace construction_brazil_server.Dtos.Admin
 {
     public class AdminEnderecoDto
     {
+        public AdminEnderecoDto()
+        {
+            Cep = string.Empty;
+        }
+
         public long Id { get; init; }
 
         [MaxLength(64)]
