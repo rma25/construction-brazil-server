@@ -12,22 +12,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: src/construction-brazil-server
+    #defaults:
+    #  run:
+    #    working-directory: src/construction-brazil-server
 
     steps:
       - uses: actions/checkout@v2
 
+        #This works
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
           include-prerelease: true
         
-        #- name: Install dependencies
-        # run: dotnet restore
-        #working-directory: src/construction-brazil-server
+      - name: Install dependencies
+        run: dotnet restore
         
       #- name: Build with dotnet
        # run: dotnet build /home/runner/work/construction-brazil-server/construction-brazil-server/src/construction-brazil-server/construction-brazil-server.csproj --configuration Release
