@@ -29,11 +29,17 @@ jobs:
         # run: dotnet restore
         #working-directory: src/construction-brazil-server
         
-      - name: Build with dotnet
-        run: dotnet build /home/runner/work/construction-brazil-server/construction-brazil-server/src/construction-brazil-server/construction-brazil-server.csproj --configuration Release
+      #- name: Build with dotnet
+       # run: dotnet build /home/runner/work/construction-brazil-server/construction-brazil-server/src/construction-brazil-server/construction-brazil-server.csproj --configuration Release
 
-      - name: dotnet publish
-        run: dotnet publish construction-brazil-server.csproj -c Release -o ${{env.DOTNET_ROOT}}/construction-brazil-server        
+     # - name: dotnet publish
+      #  run: dotnet publish construction-brazil-server.csproj -c Release -o ${{env.DOTNET_ROOT}}/construction-brazil-server     
+        
+      - name: dotnet build and publish
+        run: |
+          dotnet restore
+          dotnet build --configuration Release
+          dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/construction-brazil-server ' 
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
