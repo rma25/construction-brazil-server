@@ -36,7 +36,8 @@ jobs:
         run: dotnet build --configuration Release /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.sln
         
       - name: .NET Publish
-        run: dotnet publish -c Release -o /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj
+        run: dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/construction-brazil-server'
+        #run: dotnet publish -c Release -o /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
