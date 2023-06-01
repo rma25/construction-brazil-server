@@ -27,13 +27,13 @@ jobs:
           include-prerelease: true      
           
       - name: Testing
-        run: ls /home/runner/work/construction-brazil-server/construction-brazil-server
+        run: ls /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server
         
       - name: .NET Restore
-        run: dotnet restore ${{env.DOTNET_ROOT}}/construction-brazil-server.csproj
+        run: dotnet restore /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj
         
       - name: .NET Build
-        run: dotnet build --configuration Release ${{env.DOTNET_ROOT}}/construction-brazil-server
+        run: dotnet build --configuration Release /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj
         
       - name: .NET Publish
         run: dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/construction-brazil-server' 
