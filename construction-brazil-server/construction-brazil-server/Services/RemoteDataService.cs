@@ -15,7 +15,7 @@ namespace EEPServer.Services
             _cache = cache;
         }
 
-        public async Task<T> GetRemoteData<T>(string token, string requestUrl)
+        public async Task<T?> GetRemoteData<T>(string token, string requestUrl)
         {
             using var client = new HttpClient();
 
@@ -48,7 +48,7 @@ namespace EEPServer.Services
             }
         }
 
-        public async Task<R> PostWithReturn<T, R>(string token, string requestUrl, T data)
+        public async Task<R?> PostWithReturn<T, R>(string token, string requestUrl, T data)
         {
             using var client = new HttpClient();
 
