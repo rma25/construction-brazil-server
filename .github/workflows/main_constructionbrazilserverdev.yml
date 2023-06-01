@@ -30,10 +30,10 @@ jobs:
         #working-directory: src/construction-brazil-server
         
       - name: Build with dotnet
-        run: dotnet build construction-brazil-server.sln --configuration Release
+        run: dotnet build construction-brazil-server.csproj --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish construction-brazil-server.sln -c Release -o ${{env.DOTNET_ROOT}}/construction-brazil-server        
+        run: dotnet publish construction-brazil-server.csproj -c Release -o ${{env.DOTNET_ROOT}}/construction-brazil-server        
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
