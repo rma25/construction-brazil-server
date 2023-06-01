@@ -26,13 +26,13 @@ jobs:
         run: dotnet build --configuration Release        
       
       - name: dotnet publish
-        run: dotnet publish -c Release -o construction-brazil-server.csproj
+        run: dotnet publish -c Release -o $(Build.SourcesDirectory)/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: construction-brazil-server.csproj
+          path: $(Build.SourcesDirectory)/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj
 
   deploy:
     runs-on: ubuntu-latest
