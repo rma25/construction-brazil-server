@@ -23,8 +23,7 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release        
-        working-directory: /usr/bin/bash
+        run: dotnet build --configuration Release
       
       - name: dotnet publish
         run: dotnet publish -c Release -o /usr/bin/bash/construction-brazil-server.csproj
