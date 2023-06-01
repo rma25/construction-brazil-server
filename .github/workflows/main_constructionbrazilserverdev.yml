@@ -27,7 +27,7 @@ jobs:
           include-prerelease: true      
           
       - name: Testing
-        run: ls ${{env.DOTNET_ROOT}}
+        run: ls $(Build.SourcesDirectory)
         
       - name: .NET Restore
         run: dotnet restore ${{env.DOTNET_ROOT}}/construction-brazil-server.csproj
