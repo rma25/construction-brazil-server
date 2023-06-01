@@ -7,10 +7,6 @@ on:
   push:
     branches:
       - main
-  fork:
-    AZURE_WEBAPP_NAME: construction-brazil-server    # set this to your application's name
-    AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-    DOTNET_VERSION: '6.0.x'           # set this to the dot net version to use
   workflow_dispatch:
 
 jobs:
@@ -31,7 +27,7 @@ jobs:
           include-prerelease: true      
         
       - name: dotnet Restore
-        run: dotnet restore ${{env.DOTNET_ROOT}}/construction-brazil-server
+        run: dotnet restore ${{env.DOTNET_ROOT}}/construction-brazil-server.csproj
         
       - name: dotnet Build
         run: dotnet build --configuration Release ${{env.DOTNET_ROOT}}/construction-brazil-server
