@@ -33,11 +33,11 @@ jobs:
         run: dotnet build --configuration Release /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.sln
         
       - name: Testing
-        run: ls /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/
+        run: ls /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/bin/Release/net6.0
         
       - name: .NET Publish
-        run: dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/construction-brazil-server'
-        #run: dotnet publish -c Release -o /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj
+        run: dotnet publish -c Release -o /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/bin/Release/net6.0
+        #run: dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/construction-brazil-server'       
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
