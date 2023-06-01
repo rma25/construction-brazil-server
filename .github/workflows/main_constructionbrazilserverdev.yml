@@ -12,6 +12,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/construction-brazil-server
 
     steps:
       - uses: actions/checkout@v2
@@ -22,15 +25,15 @@ jobs:
           dotnet-version: '6.0.x'
           include-prerelease: true
         
+      - name: Install dependencies
+        run: dotnet restore
+        working-directory: src/construction-brazil-server
+        
       - name: Build with dotnet
         run: dotnet build construction-brazil-server.sln --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish construction-brazil-server.sln -c Release -o ${{env.DOTNET_ROOT}}/construction-brazil-server
-        
-      - name: Install dependencies
-        run: dotnet restore
-        working-directory: src/construction-brazil-server
+        run: dotnet publish construction-brazil-server.sln -c Release -o ${{env.DOTNET_ROOT}}/construction-brazil-server        
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
