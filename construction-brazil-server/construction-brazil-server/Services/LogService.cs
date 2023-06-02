@@ -1,8 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
+using construction_brazil_server.Constants;
 using construction_brazil_server.DataStores;
 using construction_brazil_server.Entities.Logs;
 using construction_brazil_server.Interfaces.Services;
-using EEPServer.Constants;
 using Microsoft.EntityFrameworkCore;
 
 namespace construction_brazil_server.Services

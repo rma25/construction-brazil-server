@@ -1,6 +1,6 @@
-﻿using construction_brazil_server.DataStores;
+﻿using construction_brazil_server.Constants;
+using construction_brazil_server.DataStores;
 using construction_brazil_server.Entities.Static;
-using EEPServer.Constants;
 using Microsoft.EntityFrameworkCore;
 
 namespace construction_brazil_server.Extensions.DataStores

@@ -1,10 +1,10 @@
-﻿using EEPServer.Interfaces;
+﻿using construction_brazil_server.Interfaces.Services;
 using LazyCache;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace EEPServer.Services
+namespace construction_brazil_server.Services
 {
     public class RemoteDataService : IRemoteDataService
     {

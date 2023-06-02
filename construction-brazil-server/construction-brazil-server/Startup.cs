@@ -9,8 +9,6 @@ using Newtonsoft.Json;
 using construction_brazil_server.Interfaces.Static;
 using construction_brazil_server.Interfaces.Services;
 using construction_brazil_server.Services;
-using EEPServer.Interfaces;
-using EEPServer.Services;
 using construction_brazil_server.Interfaces;
 
 namespace construction_brazil_server

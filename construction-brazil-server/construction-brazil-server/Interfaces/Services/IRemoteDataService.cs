@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace EEPServer.Interfaces
+namespace construction_brazil_server.Interfaces.Services
 {
     public interface IRemoteDataService
     {

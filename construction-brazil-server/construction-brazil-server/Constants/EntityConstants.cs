@@ -1,4 +1,4 @@
-﻿namespace EEPServer.Constants
+﻿namespace construction_brazil_server.Constants
 {
     public static class EntityConstants
     {
