@@ -36,7 +36,7 @@ jobs:
         run: ls /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/bin/Release/net6.0
         
       - name: .NET Publish
-        run: dotnet publish -c Release -o /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.sln
+        run: dotnet publish -c Release -o /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
