@@ -18,7 +18,7 @@ namespace construction_brazil_server
         private readonly AppConfig _appConfig = new AppConfig();
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
-        {          
+        {
             _appConfig = configuration.Get<AppConfig>() ?? new AppConfig();
 
             Log.Logger = new LoggerConfiguration()
@@ -35,10 +35,6 @@ namespace construction_brazil_server
 
             if (_appConfig == null)
                 Log.Logger.Fatal($"App Config is null.");
-            if (string.IsNullOrEmpty(_appConfig?.ConnectionStrings?.DefaultConnection ?? ""))
-                Log.Logger.Fatal($"App Config Connection string Default Connection not found.");
-            else
-                Log.Logger.Information($"Default Connection: {_appConfig?.ConnectionStrings?.DefaultConnection ?? ""}");
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
         }
@@ -71,13 +67,24 @@ namespace construction_brazil_server
             services.AddScoped<IContatoRepository, ContatoRepository>();
             services.AddScoped<IProfissionalRepository, ProfissionalRepository>();
 
-            // Injecting Contexts
+            if (_appConfig == null)
+            {
+                Log.Logger.Fatal($"App Config is null.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(_appConfig?.ConnectionStrings?.DefaultConnection ?? ""))
+                Log.Logger.Fatal($"App Config Connection string Default Connection not found.");
+            else
+                Log.Logger.Information($"Default Connection: {_appConfig?.ConnectionStrings?.DefaultConnection ?? ""}");
+
+            // Injecting Contexts            
             services.AddDbContext<ConstructionBrazil_Context>(options =>
             {
                 // Setting a Connection Timeout because some files are too big and need a longer connection timeout (180 seconds)
-                options.UseSqlServer(_appConfig.ConnectionStrings.DefaultConnection,
+                options.UseSqlServer(_appConfig?.ConnectionStrings?.DefaultConnection ?? "",
                     sqlServerOptions => sqlServerOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)
-                                                        .CommandTimeout(_appConfig.ConnectionStrings.ConnectionTimeout)
+                                                        .CommandTimeout(_appConfig?.ConnectionStrings?.ConnectionTimeout ?? 60)
                                                         .UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
                                                         .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
@@ -91,7 +98,7 @@ namespace construction_brazil_server
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials()
-                        .SetPreflightMaxAge(TimeSpan.FromMinutes(_appConfig.CorsPolicy.TimeoutInMinutes)));
+                        .SetPreflightMaxAge(TimeSpan.FromMinutes(_appConfig?.CorsPolicy?.TimeoutInMinutes ?? 15)));
             });
 
             // Swagger
@@ -100,7 +107,7 @@ namespace construction_brazil_server
             //    c.SwaggerDoc("v1", new OpenApiInfo
             //    {
             //        Version = "v1",
-            //        Title = "SINPROEGO",
+            //        Title = "Construction Brazil",
             //        Description = "Demonstrating Restful Web Api Skills through a CRUD application"
             //    });
             //});
@@ -126,7 +133,7 @@ namespace construction_brazil_server
             //app.UseSwagger();
             //app.UseSwaggerUI(c =>
             //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SINPROEGO");
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Construction Brazil");
             //});
 
             Log.Logger.Information("Begining data seeding...");
