@@ -71,8 +71,7 @@ namespace construction_brazil_server
 
             // Injecting Contexts            
             services.AddDbContext<ConstructionBrazil_Context>(options =>
-            {
-                // Setting a Connection Timeout because some files are too big and need a longer connection timeout (180 seconds)
+            {                
                 options.UseSqlServer(_appConfig?.ConnectionStrings?.DefaultConnection ?? "",
                     sqlServerOptions => sqlServerOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)
                                                         .CommandTimeout(_appConfig?.ConnectionStrings?.ConnectionTimeout ?? 60)
