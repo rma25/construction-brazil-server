@@ -15,7 +15,7 @@ namespace construction_brazil_server
 {
     public partial class Startup
     {
-        private readonly AppConfig _appConfig = new AppConfig();
+        private readonly AppConfig _appConfig;
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
