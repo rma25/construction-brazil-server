@@ -33,6 +33,9 @@ jobs:
         run: dotnet build --configuration Release /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.sln      
       
       - name: Create Release Directory
+        run: mkdir /home/runner/Release
+        
+      - name: Create Release Directory
         run: mkdir /home/runner/Release/construction-brazil-server
         
       - name: Testing
