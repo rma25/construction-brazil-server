@@ -35,14 +35,14 @@ jobs:
       - name: Create Release Directory
         run: mkdir /home/runner/Release
         
-      - name: Create Release Directory
-        run: mkdir /home/runner/Release/construction-brazil-server
-        
-      - name: Testing
-        run: ls /home/runner/Release/construction-brazil-server
+      - name: Create Construction Brazil Server Directory
+        run: mkdir /home/runner/Release/construction-brazil-server          
         
       - name: .NET Publish
         run: dotnet publish /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj -c Release -o /home/runner/Release/construction-brazil-server
+        
+      - name: List Release Directory Files
+        run: ls /home/runner/Release/construction-brazil-server
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
