@@ -37,6 +37,8 @@ namespace construction_brazil_server
                 Log.Logger.Fatal($"App Config is null.");
             if (string.IsNullOrEmpty(_appConfig?.ConnectionStrings?.DefaultConnection ?? ""))
                 Log.Logger.Fatal($"App Config Connection string Default Connection not found.");
+            else
+                Log.Logger.Information($"Default Connection: {_appConfig?.ConnectionStrings?.DefaultConnection ?? ""}");
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
         }
