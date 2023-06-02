@@ -50,14 +50,8 @@ jobs:
           # Artifact name
           name: artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path: /home/runner/Release/construction-brazil-server/construction-brazil-server.csproj
-          # The desired behavior if no files are found using the provided path.
-                
-      #- name: Upload artifact for deployment job
-       # uses: actions/upload-artifact@v2
-       # with:
-        #  name: .net-app
-        #  path: construction-brazil-server.dll
+          path: /home/runner/Release/construction-brazil-server/construction-brazil-server.dll
+          # The desired behavior if no files are found using the provided path.                 
 
   deploy:
     runs-on: ubuntu-latest
