@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http.Features;
 using System.IdentityModel.Tokens.Jwt;
 using Serilog;
 using construction_brazil_server.DataStores;
-using Serilog.Events;
 using construction_brazil_server.Extensions.DataStores;
 using Newtonsoft.Json;
 using construction_brazil_server.Interfaces.Static;
@@ -20,16 +19,6 @@ namespace construction_brazil_server
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             _appConfig = configuration.Get<AppConfig>() ?? new AppConfig();
-
-            Log.Logger = new LoggerConfiguration()
-                        .MinimumLevel.Verbose()
-                        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                        .MinimumLevel.Override("System", LogEventLevel.Warning)
-                        .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
-                        .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
-                        .Enrich.FromLogContext()
-                        .WriteTo.Console()
-                        .CreateLogger();
 
             Log.Logger.Information($"Environment name: {env.EnvironmentName}");
 
@@ -162,7 +151,7 @@ namespace construction_brazil_server
             });
 
             Log.Logger.Information($"Completed Configure.");
-            Log.Logger.Information("Start up completed."); 
+            Log.Logger.Information("Start up completed.");
         }
 
     }
