@@ -21,6 +21,8 @@ public class Program
 
         try
         {
+            Log.Logger.Information("Starting Create Host Builder...");
+
             return Host.CreateDefaultBuilder(args)
                        .ConfigureLogging(logging => logging.AddSerilog())
                        .ConfigureAppConfiguration((hostingContext, appConfiguration) =>
