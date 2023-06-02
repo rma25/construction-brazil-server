@@ -38,11 +38,20 @@ jobs:
       - name: .NET Publish
         run: dotnet publish -c Release -o /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/bin/Release/net6.0      
         
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.2
         with:
-          name: .net-app
-          path: construction-brazil-server.dll
+          # Artifact name
+          name: artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/bin/Release/net6.0    
+          # The desired behavior if no files are found using the provided path.
+                
+      #- name: Upload artifact for deployment job
+       # uses: actions/upload-artifact@v2
+       # with:
+        #  name: .net-app
+        #  path: construction-brazil-server.dll
 
   deploy:
     runs-on: ubuntu-latest
