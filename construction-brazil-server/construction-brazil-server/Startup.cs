@@ -42,6 +42,8 @@ namespace construction_brazil_server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Log.Logger.Information($"Started ConfigureServices...");
+
             // This is to allow bigger files to be uploaded
             services.Configure<FormOptions>(options =>
             {
@@ -117,11 +119,15 @@ namespace construction_brazil_server
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             services.AddSignalR();
+
+            Log.Logger.Information($"Completed ConfigureServices...");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ConstructionBrazil_Context dataContext)
         {
+            Log.Logger.Information($"Started Configure...");
+
             // Display a custom page in case of an exception in the controller
             app.UseExceptionHandler(
                 env.IsDevelopment()
@@ -141,7 +147,7 @@ namespace construction_brazil_server
             // If there is no data in certain tables, populate it with initial data
             dataContext.EnsureSeedDataForContext();
 
-            Log.Logger.Information("Completed data seeding...");
+            Log.Logger.Information("Completed data seeding.");
 
             // Displaying the status code in the browser instead of a blank page;
             app.UseStatusCodePages();
@@ -155,7 +161,8 @@ namespace construction_brazil_server
                 endpoints.MapControllers();
             });
 
-            Log.Logger.Information("Start up completed.");
+            Log.Logger.Information($"Completed Configure.");
+            Log.Logger.Information("Start up completed."); 
         }
 
     }
