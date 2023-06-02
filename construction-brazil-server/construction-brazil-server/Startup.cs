@@ -23,9 +23,6 @@ namespace construction_brazil_server
 
             _appConfig = configuration.Get<AppConfig>() ?? new AppConfig();
 
-            if (_appConfig == null)
-                Log.Logger.Fatal($"App Config is null.");
-
             Log.Logger = new LoggerConfiguration()
                         .MinimumLevel.Verbose()
                         .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
@@ -37,6 +34,11 @@ namespace construction_brazil_server
                         .CreateLogger();
 
             Log.Logger.Information($"Environment name: {env.EnvironmentName}");
+
+            if (_appConfig == null)
+                Log.Logger.Fatal($"App Config is null.");
+            if (string.IsNullOrEmpty(_appConfig?.ConnectionStrings?.DefaultConnection ?? ""))
+                Log.Logger.Fatal($"App Config Connection string Default Connection not found.");
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
