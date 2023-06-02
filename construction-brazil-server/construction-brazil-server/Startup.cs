@@ -18,9 +18,7 @@ namespace construction_brazil_server
         private readonly AppConfig _appConfig = new AppConfig();
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
-        {
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
+        {          
             _appConfig = configuration.Get<AppConfig>() ?? new AppConfig();
 
             Log.Logger = new LoggerConfiguration()
@@ -39,6 +37,8 @@ namespace construction_brazil_server
                 Log.Logger.Fatal($"App Config is null.");
             if (string.IsNullOrEmpty(_appConfig?.ConnectionStrings?.DefaultConnection ?? ""))
                 Log.Logger.Fatal($"App Config Connection string Default Connection not found.");
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
