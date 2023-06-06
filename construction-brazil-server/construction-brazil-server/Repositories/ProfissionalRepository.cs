@@ -30,6 +30,7 @@ namespace construction_brazil_server.Interfaces
                                         .Include(x => x.Endereco)
                                         // EF Core will not include the null, this is to avoid an object reference exception
                                         .ThenInclude(x => x != null ? x.Estado : null)
+                                        .OrderBy(x => x.Contato)
                                         .Where(x => (startedOn <= x.Criado.Date && x.Criado.Date <= endedOn)
                                                     || (x.Contato != null && startedOn <= x.Contato.DataDeNascimento.Date && x.Contato.DataDeNascimento.Date <= endedOn));
 
@@ -84,7 +85,7 @@ namespace construction_brazil_server.Interfaces
             if (filter == null)
                 throw new ArgumentNullException(nameof(filter));
 
-            var dtos = await GetAdminProfissionals(filter)
+            var dtos = await GetAdminProfissionals(filter)                            
                             .Skip(filter.CurrentPage.SkipOver(filter.TotalPerPage))
                             .Take(filter.TotalPerPage)
                             .Select(x => new AdminProfissionalDto
