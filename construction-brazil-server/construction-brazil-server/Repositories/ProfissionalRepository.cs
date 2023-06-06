@@ -30,7 +30,7 @@ namespace construction_brazil_server.Interfaces
                                         .Include(x => x.Endereco)
                                         // EF Core will not include the null, this is to avoid an object reference exception
                                         .ThenInclude(x => x != null ? x.Estado : null)
-                                        .OrderBy(x => x.Contato)
+                                        .OrderBy(x => x.Contato != null ? x.Contato.Nome : null)
                                         .Where(x => (startedOn <= x.Criado.Date && x.Criado.Date <= endedOn)
                                                     || (x.Contato != null && startedOn <= x.Contato.DataDeNascimento.Date && x.Contato.DataDeNascimento.Date <= endedOn));
 
