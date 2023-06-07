@@ -7,5 +7,6 @@
         public string? SearchText { get; init; }
         public DateTimeOffset? StartedOn { get; init; }
         public DateTimeOffset? EndedOn { get; init; }
+        public int UserOffset { get; init; }
     }
 }

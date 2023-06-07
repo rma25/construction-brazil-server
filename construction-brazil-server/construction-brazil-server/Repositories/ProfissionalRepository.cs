@@ -22,8 +22,8 @@ namespace construction_brazil_server.Interfaces
 
         protected IQueryable<Profissional> GetAdminProfissionals(ProfissionalAdminFilterDto filter)
         {
-            var startedOn = filter.StartedOn.StripDateAndTime(DateTimeOffset.MinValue);
-            var endedOn = filter.EndedOn.StripDateAndTime(DateTimeOffset.MaxValue);
+            var startedOn = filter.StartedOn.StripDateAndTime(DateTimeOffset.MinValue, filter.UserOffset);
+            var endedOn = filter.EndedOn.StripDateAndTime(DateTimeOffset.MaxValue, filter.UserOffset);
 
             var profissionals = _context.Profissionals
                                         .Include(x => x.Contato)
