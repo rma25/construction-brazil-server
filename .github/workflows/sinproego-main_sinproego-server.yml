@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'sinproego-server'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_47868BE1BBB243B2B56464C89383A155 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FAACE900ED4144FB8E43FC4FEFC6F92E }}
           package: .
