@@ -22,32 +22,17 @@ jobs:
           dotnet-version: '6.0.x'
           include-prerelease: true
 
-      - name: .NET Restore
-        run: dotnet restore /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.sln
-        
-      - name: .NET Build
-        run: dotnet build --configuration Release /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.sln      
-      
-      - name: Create Release Directory
-        run: mkdir /home/runner/Release
-        
-      - name: Create Construction Brazil Server Directory
-        run: mkdir /home/runner/Release/construction-brazil-server          
-        
-      - name: .NET Publish
-        run: dotnet publish /home/runner/work/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server/construction-brazil-server.csproj -c Release -o /home/runner/Release/sinproego-server
-        
-      - name: List Release Directory Files
-        run: ls /home/runner/Release/sinproego-server
-        
-      - name: Upload a Build Artifact
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: dotnet publish
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          # Artifact name
-          name: sinproego-artifact
-          # A file, directory or wildcard pattern that describes what to upload
-          path: /home/runner/Release/sinproego-server
-          # The desired behavior if no files are found using the provided path.    
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: ubuntu-latest
@@ -60,7 +45,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: sinproego-artifact
+          name: .net-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -68,5 +53,5 @@ jobs:
         with:
           app-name: 'sinproego-server'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_05BDCCDC8A014990ABADC4C07868D98C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_47868BE1BBB243B2B56464C89383A155 }}
           package: .
